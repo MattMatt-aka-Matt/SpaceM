@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceX Mission Page</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
+<script src="script.js"></script>
+<link rel="stylesheet" href="styles.css">
+<style>
+.container {
+  position: relative; /* Set the .container to position relative */
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff; /* Ensure text color is white */
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for readability */
+  z-index: 2; /* Ensure container is above the pseudo-background */
+}
+
+.container::before {
+  content: '';
+  position: absolute; /* Set the pseudo-element to position absolute */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('assets/nebu.jpg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.5; /* Lower the background opacity */
+  z-index: -1; /* Set below the content */
+  border-radius: 8px; /* Match the border-radius of the container */
+}
+
+.search-container, .search-bar, .sort-dropdown {
+  z-index: 3; /* Ensure search elements are fully opaque */
+  color: #fff; /* Explicitly set text color to white */
+}
+
+/* If you have any other specific text elements, ensure they have a high contrast color */
+.planet-name, .terrain {
+  color: #fff; /* Explicitly set text color to white */
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-bar, .sort-dropdown {
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ffffff; /* Ajout d'une bordure pour améliorer la visibilité */
+  background-color: rgba(62, 62, 62, 0.3); /* Fond légèrement transparent */
+  border-radius: 4px;
+  color: #fff; /* Texte blanc pour améliorer le contraste */
+}
+.search-bar {
+  padding: 10px;
+  width: 80%;
+  border-radius: 4px;
+  background-color: rgba(62, 62, 62, 0.3); ; /* Rend le fond de la barre de recherche légèrement transparent */
+  color: #ffffff; /* Définit la couleur du texte à noir pour un contraste élevé */
+}
+
+.search-bar::placeholder {
+  color: #ffffff; /* Change la couleur du texte placeholder à noir pour un contraste élevé */
+}
+
+.search-bar:focus {
+  outline: none; /* Supprime l'outline lors de la sélection de la barre de recherche */
+  background-color: #fff; /* Rend le fond complètement opaque lors de la saisie */
+  color: #000; /* Assure que le texte saisi reste noir */
+}
+
+.sort-dropdown {
+  width: auto; /* Ajustement de la largeur pour s'adapter au contenu */
+}
+
+.planet {
+  border-bottom: 1px solid #ffffff;
+  padding: 10px 0;
+}
+
+.planet:last-child {
+  border-bottom: none;
+}
+
+.planet-name {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.terrain {
+  font-size: 0.9em;
+}
+
+  </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+          <div class="logo">
+            <img src="assets/logotype.png" alt="SpaceX Logo">
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">ACCUEIL</a></li>
+            <li><a href="#">PROCHAINE MISSION</a></li>
+          </ul>
+        </nav>
+      </header>
+<div class="sidebar">
+        <a href="planet.html" class="sidebar-item">
+          <img src="assets/planet.png" alt="Planètes" class="sidebar-icon">
+          <span class="sidebar-text">PLANÈTES</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <img src="assets/rocket.png" alt="Véhicules" class="sidebar-icon">
+          <span class="sidebar-text">VÉHICULES</span>
+        </a>
+        <a href="#" class="sidebar-item">
+          <img src="assets/astre.png" alt="Personnes" class="sidebar-icon">
+          <span class="sidebar-text">PERSONNES</span>
+        </a>
+      </div>
+      
+      <div class="container">
+        <div class="search-container">
+          <input type="text" class="search-bar" placeholder="Faites votre recherche" aria-label="Recherche">
+          <select class="sort-dropdown" aria-label="Trier par">
+            <option value="population">Par population</option>
+            <!-- Ajoutez d'autres options de tri ici -->
+          </select>
+        </div>
+        <div id="planets-list" role="list">
+          <!-- Les éléments de la planète seront insérés ici par JavaScript -->
+        </div>
+      </div>
+      
+            <!-- Répétez pour chaque élément statistique -->
+            <!-- ... -->
+      
+
+
+<script>
+$(document).ready(function() {
+  // Function to fetch and update the statistics numbers
+  function updateStatistics() {
+    // Make AJAX requests to fetch the statistics data from SWAPI
+    $.ajax({
+      url: 'https://swapi.dev/api/people/',
+      method: 'GET',
+      success: function(response) {
+        // Update the number of people (characters)
+        $('.stat-item:nth-child(1) .stat-number').text(response.count);
+      }
+    });
+
+    $.ajax({
+      url: 'https://swapi.dev/api/starships/',
+      method: 'GET',
+      success: function(response) {
+        // Update the number of starships (vehicles)
+        $('.stat-item:nth-child(2) .stat-number').text(response.count);
+      }
+    });
+
+    $.ajax({
+      url: 'https://swapi.dev/api/planets/',
+      method: 'GET',
+      success: function(response) {
+        // Update the number of planets
+        $('.stat-item:nth-child(3) .stat-number').text(response.count);
+      }
+    });
+
+    // For the "Prochaine mission", you need to decide how to fetch and update this information
+    // Since SWAPI doesn't provide mission data, you'll need to use a different API or data source
+    // You can update this part of the code according to your needs.
+    // Example:
+    // $.ajax({
+    //   url: 'your-mission-api-endpoint',
+    //   method: 'GET',
+    //   success: function(response) {
+    //     $('.stat-item:nth-child(4) .stat-number').text(response.next_mission_date);
+    //   }
+    // });
+    $('.stat-item:nth-child(4) .stat-number').text('82');
+  }
+
+  // Call the updateStatistics function when the document is ready
+  updateStatistics();
+});
+document.addEventListener('DOMContentLoaded', (event) => {
+  const planetsList = document.getElementById('planets-list');
+
+  // La fonction qui récupère les données de l'API
+  function getPlanets() {
+    fetch('https://swapi.dev/api/planets/')
+      .then(response => response.json())
+      .then(data => {
+        displayPlanets(data.results);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+        planetsList.innerHTML = '<p>Failed to load data.</p>';
+      });
+  }
+
+  // La fonction qui affiche les planètes dans le DOM
+  function displayPlanets(planetsData) {
+    planetsList.innerHTML = ''; // Clear the list
+    planetsData.forEach(planet => {
+      planetsList.innerHTML += `
+        <div class="planet">
+          <div class="planet-name">${planet.name}</div>
+          <div class="terrain">${planet.terrain || 'Not available'}</div>
+        </div>
+      `;
+    });
+  }
+
+  // Appel initial pour charger les données des planètes
+  getPlanets();
+});
+
+</script>
+
+</body>
+</html>
