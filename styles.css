@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  header {
+    background-color: #000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    margin-left: -120px;
+    height: 120px;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+  }
+  
+  .navbar {
+    width: 100%;
+    max-width: 1200px; /* You can set a max-width for the content */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar .logo img {
+    width: 400px; /* Adjust as needed */
+    margin-right: -100px; /* Added space between logo and nav links */
+  }
+  
+  .navbar .nav-links {
+    list-style: none;
+    display: flex; /* Changed to flex to easily manage spacing */
+    align-items: center;
+    height: 100%;
+  }
+  
+  .navbar .nav-links li {
+    margin-left: 40px; /* Increased space between links */
+  }
+  
+  .navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px; /* Increased font size */
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 10px 20px; /* Added padding to make buttons bigger */
+    display: inline-block;
+  }
+  
+  .navbar .nav-links li a:hover {
+
+    padding-bottom: 8px; /* Adjust padding to keep text alignment */
+  }
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-top: 120px; /* Maintient la sidebar en dessous du header */
+    width: 120px; /* Vous pouvez ajuster la largeur selon les besoins */
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Changez ici pour aligner les éléments en haut */
+    border-right: 2px solid white; /* Bordure droite ajoutée */
+  }
+  
+  .sidebar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0; /* Space between items */
+    text-decoration: none;
+  }
+  
+  .sidebar-icon {
+    width: 40px; /* Adjust based on your icons' size */
+    margin-bottom: 10px; /* Space between icon and text */
+  }
+  
+  .sidebar-text {
+    color: white;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Add this to ensure the main content is not hidden behind the sidebar */
+  body {
+    padding-left: 80px; /* Should be the same as the width of the sidebar */
+    background-color: #000;
+  }
+  .main-content {
+    margin-left: 0px; /* Ajustez selon votre besoin pour éviter de cacher le contenu derrière la barre latérale */
+    padding: 20px; /* Ajoutez un peu de marge intérieure pour un meilleur espacement */
+    color: white; /* Couleur du texte blanc */
+
+    background-color: #000; /* Couleur de fond noire */
+  }
+  
+  
+  .section-about {
+    width: 80%; /* Set the width to 80% of the page width */
+    margin: 0 auto; /* This will center the section on the page */
+    background-image: url('assets/about.jpg'); /* Replace with your actual image path */
+    background-size: cover; /* This will ensure the background covers the entire section */
+    background-position: center; /* This will center the background image in the section */
+    padding: 40px; /* This adds some space inside the section around the content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a "framed" effect */
+    border-radius: 8px; /* Optional: rounds the corners of the section */
+    margin-bottom: 100px;
+    margin-top: 50px;
+  }
+  
+  
+  .section-about h1 {
+    font-size: 28px; /* Augmentez la taille de la police pour le titre */
+    margin-bottom: 20px; /* Ajoutez un espacement en bas du titre */
+  }
+  
+  .section-about p {
+    font-size: 16px; /* Ajustez la taille de la police pour le paragraphe */
+  }
+  
+  .btn {
+    background-color: black; /* Black background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    font-size: 16px; /* Font size */
+    border: 2px solid white; /* White border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background color and text color */
+  }
+  
+  
+  .btn:hover {
+    background-color: #FFFFFF; /* Couleur de fond du bouton au survol */
+    color: #000;
+  }
+  /* Style pour les titres */
+.main-content h2 {
+    font-size: 28px; /* Augmentez la taille de la police pour le titre */
+    margin-bottom: 20px; /* Ajoutez un espacement en bas du titre */
+    color: #5e96b7; /* Couleur du titre en bleu */
+  }
+  
+  /* Style pour les petits éléments de texte */
+  .section-about p,
+  .sidebar-text {
+    font-size: 16px; /* Ajustez la taille de la police pour les petits éléments de texte */
+  }  
+  .section-stats {
+    width: 80%; /* Set the width to 80% of the page width */
+    margin: 0 auto; /* This will center the section on the page */
+    background-image: url('assets/stats.jpg'); /* Replace with your actual image path */
+    background-size: cover; /* This will ensure the background covers the entire section */
+    background-position: center; /* This will center the background image in the section */
+    padding: 40px; /* This adds some space inside the section around the content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a "framed" effect */
+    border-radius: 8px; /* Optional: rounds the corners of the section */
+    color: white; /* Change the text color if necessary for better contrast */
+    position: relative; /* For the overlay effect */
+  }
+  
+  .section-stats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for text contrast, adjust as needed */
+    border-radius: 8px; /* Match the border-radius of the section */
+    z-index: 0;
+  }
+
+  .section-stats * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Additional styling for the stats grid and items */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* This will create a responsive grid layout */
+    gap: 20px; /* Space between grid items */
+    padding: 20px 0; /* Space above and below the grid */
+  }
+  
+  .stat-item {
+    text-align: center; /* Center the text within each stat item */
+    padding: 20px; /* Padding inside each stat item */
+  }
+  .stat-item img {
+    width: 40px; /* Définissez la taille souhaitée pour les images */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+  }
+  .stat-number {
+    font-size: 24px; /* Larger font size for the numbers */
+    font-weight: bold; /* Make the numbers bold */
+  }
+  footer {
+    text-align: center; /* Align content in the center */
+    margin-top: 50px; /* Add some space above the footer */
+  }
+  
+  footer button {
+    background-color: black; /* Black background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    font-size: 16px; /* Font size */
+    border: 2px solid white; /* White border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for background color and text color */
+  }
+  
+  footer button:hover {
+    background-color: white; /* White background color on hover */
+    color: black; /* Black text color on hover */
+  }
+  
