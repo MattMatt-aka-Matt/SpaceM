@@ -170,6 +170,19 @@
   border-radius: 5px;
   cursor: pointer;
 }
+#planets-list {
+  max-height: 600px; /* Ajustez cette valeur en fonction de l'espace disponible dans votre interface utilisateur */
+  overflow-y: auto; /* Active le défilement vertical si le contenu dépasse la hauteur maximale */
+  margin: 0;
+  padding: 0;
+  list-style: none; /* Enlève les puces pour une liste, si nécessaire */
+}
+
+.planet {
+  padding: 10px;
+  border-bottom: 1px solid #ccc; /* Optionnel, ajoute une ligne séparatrice entre les éléments */
+}
+
   </style>
 </head>
 
@@ -255,20 +268,35 @@ $(document).ready(function() {
   
 });
 document.addEventListener('DOMContentLoaded', (event) => {
-  const planetsList = document.getElementById('planets-list');
+    const planetsList = document.getElementById('planets-list');
 
-  // La fonction qui récupère les données de l'API
-  function getPlanets() {
-    fetch('https://swapi.dev/api/planets/')
+// La fonction qui récupère les données de l'API
+function getPlanets() {
+  const url = 'https://swapi.dev/api/planets/';
+  let allPlanets = []; // Tableau pour stocker toutes les planètes
+  
+  // Fonction pour récupérer les données de chaque page
+  function fetchPage(url) {
+    fetch(url)
       .then(response => response.json())
       .then(data => {
-        displayPlanets(data.results);
+        allPlanets = allPlanets.concat(data.results); // Ajouter les planètes de la page actuelle au tableau
+        if (data.next) {
+          fetchPage(data.next); // Récupérer la page suivante si elle existe
+        } else {
+          displayPlanets(allPlanets); // Afficher toutes les planètes une fois que toutes les pages ont été récupérées
+        }
       })
       .catch(error => {
         console.error('Error fetching data: ', error);
         planetsList.innerHTML = '<p>Failed to load data.</p>';
       });
   }
+  
+  // Appel initial pour récupérer la première page de données
+  fetchPage(url);
+}
+
   function displayPlanets(planetsData) {
   planetsList.innerHTML = ''; // Clear the list
   planetsData.forEach(planet => {
