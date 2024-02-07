@@ -201,11 +201,14 @@
       
       <div class="main-container">
         <div class="container">
-            <div class="search-container">
+            <div class="search-container" id="population-filter">
               <input type="text" class="search-bar" placeholder="Faites votre recherche" aria-label="Recherche">
-              <select class="sort-dropdown" aria-label="Trier par">
-                <option value="population">Par population</option>
-                <!-- Ajoutez d'autres options de tri ici -->
+              <select class="sort-dropdown" id="population-select" aria-label="Trier par" onchange="filterByPopulation()">
+                <option value="all">Toutes</option>
+                <option value="0-10000">0 - 10,000</option>
+                <option value="10000-1000000">10,000 - 1,000,000</option>
+                <option value="1000000-">1,000,000+</option>
+                <option value="unknown">Population inconnue</option>
               </select>
             </div>
             <div id="planets-list" role="list">
@@ -224,6 +227,29 @@
 
 
 <script>
+  // Fonction pour filtrer les planètes par population
+  function filterByPopulation() {
+  const selectedValue = document.getElementById('population-select').value;
+  const [min, max] = selectedValue.split('-');
+  const planets = document.getElementsByClassName('planet');
+  
+  for (const planet of planets) {
+    const population = planet.dataset.population;
+    if (selectedValue === 'all') {
+      planet.style.display = 'block'; // Afficher toutes les planètes si l'option "Toutes" est sélectionnée
+    } else if (selectedValue === 'unknown' && isNaN(population)) {
+      planet.style.display = 'block'; // Afficher les planètes avec population inconnue si l'option "Population inconnue" est sélectionnée
+    } else if (!isNaN(population) && parseInt(population) >= parseInt(min) && (max === '' || parseInt(population) <= parseInt(max))) {
+      planet.style.display = 'block'; // Afficher les planètes dont la population est dans la plage sélectionnée
+    } else {
+      planet.style.display = 'none'; // Masquer les autres planètes
+    }
+  }
+}
+
+
+
+
 $(document).ready(function() {
   
 });
@@ -242,12 +268,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         planetsList.innerHTML = '<p>Failed to load data.</p>';
       });
   }
-
   function displayPlanets(planetsData) {
   planetsList.innerHTML = ''; // Clear the list
   planetsData.forEach(planet => {
     const planetElement = document.createElement('div');
     planetElement.classList.add('planet');
+    planetElement.dataset.population = planet.population; // Ajouter l'attribut data-population
     planetElement.innerHTML = `
       <div class="planet-name">${planet.name}</div>
       <div class="terrain">${planet.terrain || 'Not available'}</div>
@@ -260,6 +286,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 }
+
 
 function displayPlanetDetails(planet) {
   const planetDetails = document.getElementById('planet-details');
