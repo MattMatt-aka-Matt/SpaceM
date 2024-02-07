@@ -125,7 +125,7 @@
   box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur et la hauteur */
   padding: 20px; /* Ajoutez un peu d'espace intérieur */
   max-width: 600px;
-  max-height: 400px;
+  max-height: 550px;
   margin-top: 20px;
   border-radius: 8px;
 }
@@ -265,8 +265,8 @@ function displayPlanetDetails(planet) {
 
       <img src="assets/cercle.png" alt="Diamètre" class="detail-icon">
       <span class="detail-title">Diamètre:</span> ${planet.diameter}
-
-
+    <div class="detail-item">
+    </div>
       <img src="assets/climat.png" alt="Climat" class="detail-icon">
       <span class="detail-title">Climat:</span> ${planet.climate}
 
@@ -275,8 +275,8 @@ function displayPlanetDetails(planet) {
 
       <img src="assets/magnet.png" alt="Gravité" class="detail-icon">
       <span class="detail-title">Gravité:</span> ${planet.gravity}
-
-
+    <div class="detail-item">
+    </div>
       <img src="assets/tree.png" alt="Terrain" class="detail-icon">
       <span class="detail-title">Terrain:</span> ${planet.terrain}
 
