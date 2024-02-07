@@ -17,6 +17,7 @@
   color: #fff; /* Ensure text color is white */
   background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for readability */
   z-index: 2; /* Ensure container is above the pseudo-background */
+  border: 2px solid #ccc; /* Cadre blanc */
 }
 
 .container::before {
@@ -96,7 +97,73 @@
 .terrain {
   font-size: 0.9em;
 }
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 400px;
+}
 
+.container {
+  flex-basis: 60%; /* Ajustez selon la largeur souhaitée pour la liste des planètes */
+  /* Votre style existant pour .container */
+}
+
+.details-container {
+  flex-basis: 40%; /* Ajustez selon la largeur souhaitée pour les détails des planètes */
+}
+
+.list-container {
+  flex: 1; /* Prend une partie de l'espace disponible */
+
+}
+
+.details-container {
+  flex-basis: 60%; /* Ajustez selon la largeur souhaitée pour les détails des planètes */
+  background-color: #000000; /* Fond blanc */
+  border: 2px solid #ccc; /* Cadre blanc */
+  color: #ffffff;
+  box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur et la hauteur */
+  padding: 20px; /* Ajoutez un peu d'espace intérieur */
+  max-width: 600px;
+  max-height: 400px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.detail-icon {
+  margin-right: 10px;
+  width: 40px; /* Largeur de l'icône */
+  height: 40px; /* Hauteur de l'icône */
+}
+.detail-title {
+  color: #5e96b7; /* Couleur du titre */
+}
+.details-container {
+  /* Vos styles existants pour .details-container */
+  display: flex; /* Utiliser Flexbox */
+  flex-wrap: wrap; /* Permettre le passage à la ligne */
+}
+.detail-item {
+  margin-top: 50px; /* Espacement vertical */
+  margin-left: 30px;
+}
+.planet-detail {
+  width: 50%; /* Chaque détail prend 50% de la largeur */
+  padding: 10px; /* Ajouter un peu d'espace intérieur */
+  box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur */
+}
+
+#btn-en-savoir-plus {
+  position: absolute;
+  bottom: 10px; /* Espacement depuis le bas */
+  right: 10px; /* Espacement depuis la droite */
+  background-color: #5e96b7; /* Couleur du fond */
+  color: #ffffff; /* Couleur du texte */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
   </style>
 </head>
 
@@ -127,18 +194,24 @@
         </a>
       </div>
       
-      <div class="container">
-        <div class="search-container">
-          <input type="text" class="search-bar" placeholder="Faites votre recherche" aria-label="Recherche">
-          <select class="sort-dropdown" aria-label="Trier par">
-            <option value="population">Par population</option>
-            <!-- Ajoutez d'autres options de tri ici -->
-          </select>
-        </div>
-        <div id="planets-list" role="list">
-          <!-- Les éléments de la planète seront insérés ici par JavaScript -->
+      <div class="main-container">
+        <div class="container">
+            <div class="search-container">
+              <input type="text" class="search-bar" placeholder="Faites votre recherche" aria-label="Recherche">
+              <select class="sort-dropdown" aria-label="Trier par">
+                <option value="population">Par population</option>
+                <!-- Ajoutez d'autres options de tri ici -->
+              </select>
+            </div>
+            <div id="planets-list" role="list">
+              <!-- Les éléments de la planète seront insérés ici par JavaScript -->
+            </div>
+          </div>
+        <div id="planet-details" class="details-container">
+          <!-- Les détails de la planète seront insérés ici par JavaScript -->
         </div>
       </div>
+      
       
             <!-- Répétez pour chaque élément statistique -->
             <!-- ... -->
@@ -210,18 +283,55 @@ document.addEventListener('DOMContentLoaded', (event) => {
       });
   }
 
-  // La fonction qui affiche les planètes dans le DOM
   function displayPlanets(planetsData) {
-    planetsList.innerHTML = ''; // Clear the list
-    planetsData.forEach(planet => {
-      planetsList.innerHTML += `
-        <div class="planet">
-          <div class="planet-name">${planet.name}</div>
-          <div class="terrain">${planet.terrain || 'Not available'}</div>
-        </div>
-      `;
+  planetsList.innerHTML = ''; // Clear the list
+  planetsData.forEach(planet => {
+    const planetElement = document.createElement('div');
+    planetElement.classList.add('planet');
+    planetElement.innerHTML = `
+      <div class="planet-name">${planet.name}</div>
+      <div class="terrain">${planet.terrain || 'Not available'}</div>
+    `;
+    planetsList.appendChild(planetElement);
+
+    // Ajouter un gestionnaire d'événements click pour chaque élément de planète
+    planetElement.addEventListener('click', function() {
+      displayPlanetDetails(planet);
     });
-  }
+  });
+}
+
+function displayPlanetDetails(planet) {
+  const planetDetails = document.getElementById('planet-details');
+  planetDetails.innerHTML = `
+    <h2 style="color: #5e96b7;">${planet.name}</h2>
+    <p class="detail-title">Population:</p> ${planet.population}
+    <div class="detail-item">
+
+      <img src="assets/cercle.png" alt="Diamètre" class="detail-icon">
+      <span class="detail-title">Diamètre:</span> ${planet.diameter}
+
+
+      <img src="assets/climat.png" alt="Climat" class="detail-icon">
+      <span class="detail-title">Climat:</span> ${planet.climate}
+
+    </div>
+    <div class="detail-item">
+
+      <img src="assets/magnet.png" alt="Gravité" class="detail-icon">
+      <span class="detail-title">Gravité:</span> ${planet.gravity}
+
+
+      <img src="assets/tree.png" alt="Terrain" class="detail-icon">
+      <span class="detail-title">Terrain:</span> ${planet.terrain}
+
+    </div>
+    <!-- Ajoutez d'autres détails que vous souhaitez afficher ici -->
+  `;
+  planetDetails.style.display = 'block';
+}
+
+
 
   // Appel initial pour charger les données des planètes
   getPlanets();
