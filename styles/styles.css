@@ -111,7 +111,7 @@
   .section-about {
     width: 80%; /* Set the width to 80% of the page width */
     margin: 0 auto; /* This will center the section on the page */
-    background-image: url('assets/about.jpg'); /* Replace with your actual image path */
+    background-image: url('../assets/about.jpg'); /* Replace with your actual image path */
     background-size: cover; /* This will ensure the background covers the entire section */
     background-position: center; /* This will center the background image in the section */
     padding: 40px; /* This adds some space inside the section around the content */
@@ -162,7 +162,7 @@
   .section-stats {
     width: 80%; /* Set the width to 80% of the page width */
     margin: 0 auto; /* This will center the section on the page */
-    background-image: url('assets/stats.jpg'); /* Replace with your actual image path */
+    background-image: url('../assets/stats.jpg'); /* Replace with your actual image path */
     background-size: cover; /* This will ensure the background covers the entire section */
     background-position: center; /* This will center the background image in the section */
     padding: 40px; /* This adds some space inside the section around the content */

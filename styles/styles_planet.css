@@ -1,0 +1,178 @@
+.container {
+    position: relative; /* Set the .container to position relative */
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff; /* Ensure text color is white */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for readability */
+    z-index: 2; /* Ensure container is above the pseudo-background */
+    border: 2px solid #ccc; /* Cadre blanc */
+  }
+  
+  .container::before {
+    content: '';
+    position: absolute; /* Set the pseudo-element to position absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../assets/nebu.jpg') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.5; /* Lower the background opacity */
+    z-index: -1; /* Set below the content */
+    border-radius: 8px; /* Match the border-radius of the container */
+  }
+  
+  .search-container, .search-bar, .sort-dropdown {
+    z-index: 3; /* Ensure search elements are fully opaque */
+    color: #fff; /* Explicitly set text color to white */
+  }
+  
+  /* If you have any other specific text elements, ensure they have a high contrast color */
+  .planet-name, .terrain {
+    color: #fff; /* Explicitly set text color to white */
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar, .sort-dropdown {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid #ffffff; /* Ajout d'une bordure pour améliorer la visibilité */
+    background-color: rgba(62, 62, 62, 0.3); /* Fond légèrement transparent */
+    border-radius: 4px;
+    color: #fff; /* Texte blanc pour améliorer le contraste */
+  }
+  .search-bar {
+    padding: 10px;
+    width: 80%;
+    border-radius: 4px;
+    background-color: rgba(62, 62, 62, 0.3); ; /* Rend le fond de la barre de recherche légèrement transparent */
+    color: #ffffff; /* Définit la couleur du texte à noir pour un contraste élevé */
+  }
+  
+  .search-bar::placeholder {
+    color: #ffffff; /* Change la couleur du texte placeholder à noir pour un contraste élevé */
+  }
+  
+  .search-bar:focus {
+    outline: none; /* Supprime l'outline lors de la sélection de la barre de recherche */
+    background-color: #fff; /* Rend le fond complètement opaque lors de la saisie */
+    color: #000; /* Assure que le texte saisi reste noir */
+  }
+  
+  .sort-dropdown {
+    width: auto; /* Ajustement de la largeur pour s'adapter au contenu */
+  }
+  
+  .planet {
+    border-bottom: 1px solid #ffffff;
+    padding: 10px 0;
+  }
+  
+  .planet:last-child {
+    border-bottom: none;
+  }
+  
+  .planet-name {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  .terrain {
+    font-size: 0.9em;
+  }
+  .main-container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 400px;
+  }
+  
+  .container {
+    flex-basis: 60%; /* Ajustez selon la largeur souhaitée pour la liste des planètes */
+    /* Votre style existant pour .container */
+  }
+  
+  .details-container {
+    flex-basis: 40%; /* Ajustez selon la largeur souhaitée pour les détails des planètes */
+  }
+  
+  .list-container {
+    flex: 1; /* Prend une partie de l'espace disponible */
+  
+  }
+  
+  .details-container {
+    flex-basis: 60%; /* Ajustez selon la largeur souhaitée pour les détails des planètes */
+    background-color: #000000; /* Fond blanc */
+    border: 2px solid #ccc; /* Cadre blanc */
+    color: #ffffff;
+    box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur et la hauteur */
+    padding: 20px; /* Ajoutez un peu d'espace intérieur */
+    max-width: 600px;
+    max-height: 600px;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  
+  .detail-icon {
+    margin-right: 10px;
+    width: 40px; /* Largeur de l'icône */
+    height: 40px; /* Hauteur de l'icône */
+  }
+  .detail-title {
+    color: #5e96b7; /* Couleur du titre */
+  }
+  .details-container {
+    /* Vos styles existants pour .details-container */
+    display: flex; /* Utiliser Flexbox */
+    flex-wrap: wrap; /* Permettre le passage à la ligne */
+  }
+  .detail-item {
+    margin-top: 50px; /* Espacement vertical */
+    margin-left: 30px;
+  }
+  .detail-button {
+   margin-top: 50px; 
+    margin-left: 400px;
+    max-height: 30px;
+  }
+  .planet-detail {
+    width: 50%; /* Chaque détail prend 50% de la largeur */
+    padding: 10px; /* Ajouter un peu d'espace intérieur */
+    box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur */
+  }
+  
+  #btn-en-savoir-plus {
+    position: absolute;
+    bottom: 10px; /* Espacement depuis le bas */
+    right: 10px; /* Espacement depuis la droite */
+    background-color: #5e96b7; /* Couleur du fond */
+    color: #ffffff; /* Couleur du texte */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #planets-list {
+    max-height: 600px; /* Ajustez cette valeur en fonction de l'espace disponible dans votre interface utilisateur */
+    overflow-y: auto; /* Active le défilement vertical si le contenu dépasse la hauteur maximale */
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Enlève les puces pour une liste, si nécessaire */
+  }
+  
+  .planet {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Optionnel, ajoute une ligne séparatrice entre les éléments */
+  }
+  .planet:hover {
+    background-color: #5e96b7; /* Couleur de fond bleue lors du survol */
+    cursor: pointer; /* Change le curseur en pointeur pour indiquer que l'élément est cliquable */
+    color: white; /* Change la couleur du texte en blanc pour un meilleur contraste, si nécessaire */
+  }
