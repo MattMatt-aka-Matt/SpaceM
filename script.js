@@ -34,14 +34,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Appliquez l'animation à tous les boutons
     navButtons.forEach(addAnimation);
 });
-document.addEventListener('DOMContentLoaded', function() {
-    const participateButton = document.querySelector('footer button');
-
-    participateButton.addEventListener('mouseover', function() {
-        this.classList.add('animate-button');
-    });
-
-    participateButton.addEventListener('animationend', function() {
-        this.classList.remove('animate-button');
-    });
-});
