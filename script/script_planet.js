@@ -45,23 +45,28 @@ async function getPlanets(apiUrl) {
     const data = await response.json();
     return data;
   }
-// Fonction pour afficher les données des planètes sur la page
-function displayPlanets(planetsData) {
-  const planetsList = document.getElementById('planets-list');
-  planetsList.innerHTML = ''; // Nettoyer la liste avant d'afficher les nouvelles planètes
 
-  planetsData.forEach(planet => {
-    const planetElement = document.createElement('div');
-    planetElement.classList.add('planet');
-    planetElement.dataset.population = planet.population;
-    planetElement.innerHTML = `
-      <div class="planet-name">${planet.name}</div>
-      <div class="terrain">${planet.terrain || 'Non disponible'}</div>
-    `;
-    planetsList.appendChild(planetElement);
-    planetElement.addEventListener('click', () => displayPlanetDetails(planet));
-  });
-}
+  function displayPlanets(planetsData) {
+    const planetsList = document.getElementById('planets-list');
+    planetsList.innerHTML = ''; // Nettoyer la liste avant d'afficher les nouvelles planètes
+  
+    planetsData.forEach(planet => {
+      const planetElement = document.createElement('div');
+      planetElement.classList.add('planet');
+      planetElement.dataset.population = planet.population;
+      planetElement.innerHTML = `
+        <div class="planet-name">${planet.name}</div>
+        <div class="terrain">${planet.terrain || 'Non disponible'}</div>
+      `;
+      planetsList.appendChild(planetElement);
+      planetElement.addEventListener('click', () => displayPlanetDetails(planet));
+    });
+  
+    // Mise à jour du nombre de planètes trouvées
+    const planetCountElement = document.getElementById('planet-count');
+    planetCountElement.textContent = ` ${planetsData.length} resultat(s)`;
+  }
+  
 
 // Fonction pour afficher les détails d'une planète spécifique
 function displayPlanetDetails(planet) {
