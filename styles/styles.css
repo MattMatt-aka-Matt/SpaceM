@@ -6,6 +6,8 @@
   
   body {
     font-family: 'Arial', sans-serif;
+
+  
   }
   
   header {
@@ -229,4 +231,3 @@
     background-color: white; /* White background color on hover */
     color: black; /* Black text color on hover */
   }
-  

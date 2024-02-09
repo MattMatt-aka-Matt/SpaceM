@@ -109,13 +109,13 @@
   
   .details-container {
     flex-basis: 60%; /* Ajustez selon la largeur souhaitée pour les détails des planètes */
-    background-color: #000000; /* Fond blanc */
+    background-color: #151515; /* Fond blanc */
     border: 2px solid #ccc; /* Cadre blanc */
     color: #ffffff;
     box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur et la hauteur */
     padding: 20px; /* Ajoutez un peu d'espace intérieur */
     max-width: 600px;
-    max-height: 600px;
+    max-height: 750px;
     margin-top: 20px;
     border-radius: 8px;
   }
@@ -156,6 +156,7 @@
     color: #ffffff; /* Couleur du texte */
     border: none;
     padding: 10px 20px;
+    margin-bottom: 200px;
     border-radius: 5px;
     cursor: pointer;
   }
@@ -176,3 +177,16 @@
     cursor: pointer; /* Change le curseur en pointeur pour indiquer que l'élément est cliquable */
     color: white; /* Change la couleur du texte en blanc pour un meilleur contraste, si nécessaire */
   }
+  .planet-detail-image {
+    max-width: 200px; /* Limite la largeur à 100 pixels */
+    max-height: 200px; /* Limite la hauteur à 100 pixels */
+    width: auto; /* Permet à la largeur de s'ajuster automatiquement pour conserver les proportions */
+    height: auto; /* Permet à la hauteur de s'ajuster automatiquement pour conserver les proportions */
+    border: 2px solid white; /* Ajoute un cadre blanc de 2 pixels */
+    border-radius: 5%; /* Applique un rayon de bordure de 50% pour créer un cercle */
+  }
+  .btn {
+    position: relative; /* Définir la position relative */
+    top: -120px; /* Déplacer le bouton de 10 pixels vers le haut, ajustez cette valeur selon vos besoins */
+  }
+  

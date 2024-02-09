@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
     // Appliquez l'animation à tous les boutons
     navButtons.forEach(addAnimation);
 });
