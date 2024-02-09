@@ -1,4 +1,3 @@
-
 function init(apiUrl) {
   document.addEventListener('DOMContentLoaded', () => {
     getPlanets(apiUrl);
@@ -39,34 +38,36 @@ async function getPlanets(apiUrl) {
 
   displayPlanets(allPlanets);
 }
-  // Fonction pour effectuer la requête fetch à l'API
-  async function fetchPlanets(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  }
 
-  function displayPlanets(planetsData) {
-    const planetsList = document.getElementById('planets-list');
-    planetsList.innerHTML = ''; // Nettoyer la liste avant d'afficher les nouvelles planètes
-  
-    planetsData.forEach(planet => {
-      const planetElement = document.createElement('div');
-      planetElement.classList.add('planet');
-      planetElement.dataset.population = planet.population;
-      planetElement.innerHTML = `
-        <div class="planet-name">${planet.name}</div>
-        <div class="terrain">${planet.terrain || 'Non disponible'}</div>
-      `;
-      planetsList.appendChild(planetElement);
-      planetElement.addEventListener('click', () => displayPlanetDetails(planet));
-    });
-  
-    // Mise à jour du nombre de planètes trouvées
-    const planetCountElement = document.getElementById('planet-count');
-    planetCountElement.textContent = ` ${planetsData.length} resultat(s)`;
-  }
-  
+// Fonction pour effectuer la requête fetch à l'API
+async function fetchPlanets(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+// Fonction pour afficher les données des planètes sur la page
+function displayPlanets(planetsData) {
+  const planetsList = document.getElementById('planets-list');
+  planetsList.innerHTML = ''; // Nettoyer la liste avant d'afficher les nouvelles planètes
+
+  planetsData.forEach(planetData => {
+    const planetElement = document.createElement('div');
+    planetElement.classList.add('planet');
+    planetElement.dataset.population = planetData.population;
+    planetElement.planetData = planetData; // Stocker les données de la planète
+    planetElement.innerHTML = `
+      <div class="planet-name">${planetData.name}</div>
+      <div class="terrain">${planetData.terrain || 'Non disponible'}</div>
+    `;
+    planetsList.appendChild(planetElement);
+    planetElement.addEventListener('click', () => displayPlanetDetails(planetData));
+  });
+
+  // Mise à jour du nombre de planètes trouvées
+  const planetCountElement = document.getElementById('planet-count');
+  planetCountElement.textContent = `${planetsData.length} resultat(s)`;
+}
 
 // Fonction pour afficher les détails d'une planète spécifique
 function displayPlanetDetails(planet) {
@@ -91,31 +92,40 @@ function displayPlanetDetails(planet) {
       <span class="detail-title">Terrain:</span> ${planet.terrain}
     </div>
     <div class="detail-item">
-    <img src="${planet.image}" alt="${planet.name}" class="planet-detail-image"> <!-- Ajout de l'image -->
+      <img src="${planet.image}" alt="${planet.name}" class="planet-detail-image"> <!-- Ajout de l'image -->
     </div>
     <div class="detail-button">
       <button class="btn">EN SAVOIR PLUS</button>
     </div>
-    
   `;
   planetDetails.style.display = 'block';
 }
+// Fonction pour filtrer les planètes par population
+function filterByPopulation() {
+  const selectedValue = document.getElementById('population-select').value;
+  const [min, max] = selectedValue.split('-');
+  const planets = document.getElementsByClassName('planet');
 
-  // Fonction pour filtrer les planètes par population
-  function filterByPopulation() {
-    const selectedValue = document.getElementById('population-select').value;
-    const [min, max] = selectedValue.split('-');
-    const planets = document.getElementsByClassName('planet');
-  
-    for (const planet of planets) {
-      const population = planet.dataset.population;
-      let shouldDisplay = selectedValue === 'all' ||
-                          (selectedValue === 'unknown' && isNaN(population)) ||
-                          (!isNaN(population) && parseInt(population) >= parseInt(min) && (max === '' || parseInt(population) <= parseInt(max)));
-  
-      planet.style.display = shouldDisplay ? 'block' : 'none';
+  let visiblePlanets = 0; // Variable pour compter les planètes visibles
+
+  for (const planetElement of planets) {
+    const population = parseInt(planetElement.dataset.population);
+    let shouldDisplay = selectedValue === 'all' ||
+                        (selectedValue === 'unknown' && isNaN(population)) ||
+                        (!isNaN(population) && parseInt(population) >= parseInt(min) && (max === '' || parseInt(population) <= parseInt(max)));
+
+    if (shouldDisplay) {
+      planetElement.style.display = 'block';
+      visiblePlanets++; // Incrémenter le nombre de planètes visibles
+    } else {
+      planetElement.style.display = 'none';
     }
   }
-  
-  // Initialisation de l'application avec l'URL de l'API
-  init('https://swapi.dev/api/planets/');
+
+  // Mise à jour du nombre de planètes trouvées après filtrage
+  const planetCountElement = document.getElementById('planet-count');
+  planetCountElement.textContent = `${visiblePlanets} resultat(s)`;
+}
+
+// Initialisation de l'application avec l'URL de l'API
+init('https://swapi.dev/api/planets/');
