@@ -9,7 +9,7 @@ function init(apiUrl) {
 async function searchPlanetImages(planetName) {
   const apiKey = 'AIzaSyAQ7nnje0RyDVE05F4U_bJj8YSh7mhFhXk'; // Remplacez par votre clé d'API Google
   const cx = 'a078502ba5284453a'; // Remplacez par votre identifiant de recherche personnalisée
-  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&searchType=image&q=Star+Wars+${planetName}`;
+  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&searchType=image&q=${planetName}`;
   
   try {
       const response = await fetch(url);
